@@ -76,27 +76,27 @@ export class CalciteDate {
   }
 
   selectPrevMonth() {
-    if(this.month === 0 ) {
+    if (this.month === 0) {
       this.year = this.year - 1;
     }
-    this.month = (12 + this.month -1) %12;
+    this.month = (12 + this.month - 1) % 12;
   }
 
-  selectPrevMonthOnEnter(event: KeyboardEvent){
-    if(event.keyCode === ENTER){
+  selectPrevMonthOnEnter(event: KeyboardEvent) {
+    if (event.keyCode === ENTER) {
       this.selectPrevMonth();
     }
   }
 
   selectNextMonth() {
-    if(this.month === 11){
+    if (this.month === 11) {
       this.year = this.year + 1;
     }
     this.month = (this.month + 1) % 12;
   }
 
   selectNextMonthOnEnter(event: KeyboardEvent) {
-    if(event.keyCode === ENTER){
+    if (event.keyCode === ENTER) {
       this.selectNextMonth();
     }
   }
@@ -112,38 +112,44 @@ export class CalciteDate {
     return (
       <Host>
         <div class={`${this.showCalendar ? "host-expanded" : ""}`}>
-        <div class={`date-input-wrapper ${this.showCalendar ? "expanded" : ""}`} role="application" onBlur = {() => this.closeCalendar()}>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="calendar-icon"
-            viewBox="0 0 16 16"
-            width="16"
-            height="16"
+          <div
+            class={`date-input-wrapper ${this.showCalendar ? "expanded" : ""}`}
+            role="application"
+            onBlur={() => this.closeCalendar()}
           >
-            <path d="M16 16H0V6h16zM3 7H1v2h2zm3 0H4v2h2zm3 0H7v2h2zm3 0h-2v2h2zm3 0h-2v2h2zM3 10H1v2h2zm3 0H4v2h2zm3 0H7v2h2zm3 0h-2v2h2zm3 0h-2v2h2zM3 13H1v2h2zm3 0H4v2h2zm3 0H7v2h2zm3 0h-2v2h2zm3 0h-2v2h2zM5 2V1h6v1zm9-1v1h1v2H1V2h1V1H0v4h16V1zM4 0H3v2h1zm9 0h-1v2h1z" />
-          </svg>
-          <input
-            type="text"
-            placeholder="dd/mm/yyyy"
-            value={this.value}
-            class="date-input"
-            onFocus = {() => this.expandCalendar()}
-          />
-        </div>
-        { this.showCalendar ? 
-        <div class="calendar-picker-wrapper">
-          {this.renderMonths(
-            this.getMonth(selectedDate),
-            this.getYear(selectedDate)
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="calendar-icon"
+              viewBox="0 0 16 16"
+              width="16"
+              height="16"
+            >
+              <path d="M16 16H0V6h16zM3 7H1v2h2zm3 0H4v2h2zm3 0H7v2h2zm3 0h-2v2h2zm3 0h-2v2h2zM3 10H1v2h2zm3 0H4v2h2zm3 0H7v2h2zm3 0h-2v2h2zm3 0h-2v2h2zM3 13H1v2h2zm3 0H4v2h2zm3 0H7v2h2zm3 0h-2v2h2zm3 0h-2v2h2zM5 2V1h6v1zm9-1v1h1v2H1V2h1V1H0v4h16V1zM4 0H3v2h1zm9 0h-1v2h1z" />
+            </svg>
+            <input
+              type="text"
+              placeholder="dd/mm/yyyy"
+              value={this.value}
+              class="date-input"
+              onFocus={() => this.expandCalendar()}
+            />
+          </div>
+          {this.showCalendar ? (
+            <div class="calendar-picker-wrapper">
+              {this.renderMonths(
+                this.getMonth(selectedDate),
+                this.getYear(selectedDate)
+              )}
+              {this.renderCalendar(
+                this.getMonth(selectedDate),
+                this.getYear(selectedDate),
+                selectedDate.getDate()
+              )}
+            </div>
+          ) : (
+            ""
           )}
-          {this.renderCalendar(
-            this.getMonth(selectedDate),
-            this.getYear(selectedDate),
-            selectedDate.getDate()
-          )}
-        </div> : ""
-        }
-        <slot />
+          <slot />
         </div>
       </Host>
     );
@@ -204,7 +210,13 @@ export class CalciteDate {
 
     return (
       <div class="month-year" aria-hidden="true">
-        <span role="button" aria-label={this.prevMonthLabel} tabindex={0} onClick ={() => this.selectPrevMonth()} onKeyDown ={(event) => this.selectPrevMonthOnEnter(event)}>
+        <span
+          role="button"
+          aria-label={this.prevMonthLabel}
+          tabindex={0}
+          onClick={() => this.selectPrevMonth()}
+          onKeyDown={event => this.selectPrevMonthOnEnter(event)}
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             class="left-icon"
@@ -215,15 +227,28 @@ export class CalciteDate {
             <path d="M11.783 14H9.017l-6-6 6-6h2.766l-6 6z" />
           </svg>
         </span>
-        <span class="month" role="heading" aria-live="assertive" aria-atomic="true">{localizedMonth}</span>
+        <span
+          class="month"
+          role="heading"
+          aria-live="assertive"
+          aria-atomic="true"
+        >
+          {localizedMonth}
+        </span>
         <input
           class="year"
           type="number"
           value={year}
           style={{ width: `${(`${year}`.length + 1) * 11}px` }}
-          onChange={ (event) => this.onYearChange(event) }
+          onChange={event => this.onYearChange(event)}
         />
-        <span role="button" aria-label={this.nextMonthLabel} tabindex={0} onClick ={() => this.selectNextMonth()} onKeyDown ={(event) => this.selectNextMonthOnEnter(event)} >
+        <span
+          role="button"
+          aria-label={this.nextMonthLabel}
+          tabindex={0}
+          onClick={() => this.selectNextMonth()}
+          onKeyDown={event => this.selectNextMonthOnEnter(event)}
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             class="right-icon"
@@ -245,7 +270,7 @@ export class CalciteDate {
     if (startDay === this.startOfWeek) {
       return days;
     }
-    for (let i = (6 - this.startOfWeek + startDay) %7; i >=0; i--) {
+    for (let i = (6 - this.startOfWeek + startDay) % 7; i >= 0; i--) {
       days.push(prevMonDays - i);
     }
     return days;
@@ -254,19 +279,29 @@ export class CalciteDate {
   private getNextMonthdays(month, year) {
     let endDay = new Date(year, month + 1, 0).getDay(),
       days = [];
-    if (endDay === ((this.startOfWeek + 6) % 7)) {
+    if (endDay === (this.startOfWeek + 6) % 7) {
       return days;
     }
 
     return [...Array((6 - (endDay - this.startOfWeek)) % 7).keys()];
   }
 
-  private renderDay(day, isSelected = false){
-    return <td class={`cur-day day ${isSelected ? "selected-day" : ""}`} onClick={() => this.setDate(day)} onKeyPress={(event) => this.keyPress(event, day)} role="gridcell" tabindex={isSelected ? 0 : -1}>{day}</td>
+  private renderDay(day, isSelected = false) {
+    return (
+      <td
+        class={`cur-day day ${isSelected ? "selected-day" : ""}`}
+        onClick={() => this.setDate(day)}
+        onKeyPress={event => this.keyPress(event, day)}
+        role="gridcell"
+        tabindex={isSelected ? 0 : -1}
+      >
+        {day}
+      </td>
+    );
   }
 
-  keyPress(event, day){
-    if(event.keyCode === ENTER){
+  keyPress(event, day) {
+    if (event.keyCode === ENTER) {
       this.setDate(day);
     }
   }
@@ -279,31 +314,38 @@ export class CalciteDate {
       splitDays = [],
       days = [
         ...prevMonDays.map(prev => this.renderDay(prev)),
-        ...curMonDays.map(cur => this.renderDay(cur+1, cur+1 === selectedDate)),
-        ...nextMonDays.map(next => this.renderDay(next+1))
+        ...curMonDays.map(cur =>
+          this.renderDay(cur + 1, cur + 1 === selectedDate)
+        ),
+        ...nextMonDays.map(next => this.renderDay(next + 1))
       ];
     for (let i = 0; i < days.length; i += 7)
       splitDays.push(days.slice(i, i + 7));
 
-      
     return (
       <table class="calender" role="grid">
         <thead class="weekdays" role="presentation">
           {weekDays.map(weekday => (
-            <th class="weekday" role="columnheader">{weekday}</th>
+            <th class="weekday" role="columnheader">
+              {weekday}
+            </th>
           ))}
         </thead>
         <tbody class="calendar-days" aria-hidden={true}>
           {splitDays.map(days => (
-            <tr class="week" role="row">{days}</tr>
+            <tr class="week" role="row">
+              {days}
+            </tr>
           ))}
         </tbody>
       </table>
     );
   }
-  
+
   setDate(day) {
-    this.value = new Date(this.year, this.month, day).toISOString().substr(0,10);
+    this.value = new Date(this.year, this.month, day)
+      .toISOString()
+      .substr(0, 10);
     this.syncProxyInputToThis();
     this.calciteDateChange.emit();
   }
@@ -326,13 +368,17 @@ export class CalciteDate {
   }
 
   private syncThisToProxyInput = () => {
-    this.value = new Intl.DateTimeFormat(this.locale).format(new Date(`${this.inputProxy.value} `));
+    this.value = new Intl.DateTimeFormat(this.locale).format(
+      new Date(`${this.inputProxy.value} `)
+    );
     this.min = this.inputProxy.min;
     this.max = this.inputProxy.max;
   };
 
   private syncProxyInputToThis = () => {
-    this.inputProxy.value = new Date(`${this.value} `).toISOString().substr(0,10);
+    this.inputProxy.value = new Date(`${this.value} `)
+      .toISOString()
+      .substr(0, 10);
     this.inputProxy.min = this.min;
     this.inputProxy.max = this.max;
   };
