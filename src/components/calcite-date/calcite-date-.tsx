@@ -326,7 +326,7 @@ export class CalciteDate {
   }
 
   private syncThisToProxyInput = () => {
-    this.value = this.inputProxy.value;
+    this.value = new Intl.DateTimeFormat(this.locale).format(new Date(`${this.inputProxy.value} `));
     this.min = this.inputProxy.min;
     this.max = this.inputProxy.max;
   };
