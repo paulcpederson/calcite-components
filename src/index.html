@@ -278,8 +278,8 @@
           11 Autodismiss (slow),link</button><br />
 
           <h5>You can use in combination with alerts inserted into the DOM programmatically</h5>
-          <button onclick=createExampleAlert('created-1')>created alert</button><br />
-          <button onclick=createExampleAlert('created-2')>created alert 2</button><br />
+          <button>created alert</button><br />
+          <button>created alert 2</button><br />
 
           <h5>You can close opened alerts</h5>
           <button onclick="document.querySelector('#alert-six').closeCalciteAlert()">
@@ -368,7 +368,20 @@
         </div>
       </calcite-tab>
       <calcite-tab>
-        <calcite-date></calcite-date>
+        <calcite-date id="dateSample" value="12/12/2019" ></calcite-date>
+        <script>
+          const dateSample = document.getElementById("dateSample");
+
+          dateSample.addEventListener("calciteDateChange", function(
+            e
+          ) {
+            dateSample.value = e.target.value;
+            console.log(
+              "Date selected <calcite-date>",
+                e.target.value
+            );
+          });
+        </script>
       </calcite-tab>
     </calcite-tabs>
 
