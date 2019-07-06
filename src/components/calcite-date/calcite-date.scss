@@ -13,102 +13,123 @@
   tap-highlight-color: transparent;
 }
 
-.host-expanded{
+.host-expanded {
   background-color: $white;
   border: 1px solid $light-gray;
-  box-shadow: 16px 16px 40px 8px rgba($blk-240, 0.15);;
+  box-shadow: 16px 16px 40px 8px rgba($blk-240, 0.15);
 }
 
-.date-input-wrapper{
+.date-input-wrapper {
   padding: 12px;
   border: 1px solid $light-gray;
-  &.expanded{
+
+  &.expanded {
     border: none;
     border-bottom: 1px solid $light-gray;
   }
-  
-  &:active, &:focus, &.open{
+
+  &:active,
+  &:focus,
+  &.open {
     border: none;
     border-bottom: 1px solid $light-gray;
   }
+
   .calendar-icon {
     fill: $darkest-gray;
   }
+
   .date-input {
     color: $darkest-gray;
     border: none;
     font-weight: 400;
     font-size: inherit;
-    margin-left: 12px; 
-    &:active, &:focus{
+    margin-left: 12px;
+
+    &:active,
+    &:focus {
       outline: none;
     }
   }
 }
-.month-year{
+.month-year {
+  display: flex;
+  justify-content: space-around;
   padding: 12px 0px;
-  width: 100%;
   text-align: center;
-  .right-icon, .left-icon {
+
+  .right-icon,
+  .left-icon {
     fill: $light-gray;
     font-weight: 400;
     &:hover {
       fill: $black;
     }
   }
-  .month, .year{
+
+  .month,
+  .year {
     font-size: medium;
     color: black;
     font-weight: 400;
-    margin-left: 12px; 
   }
-  .year{
-    margin-right: 12px;
+
+  .year {
     border: none;
   }
 }
-.calendar-picker-wrapper{
+
+.calendar-picker-wrapper {
   padding: 12px;
 }
-.calender{
-  table-layout: fixed;
-  border-collapse: collapse;
-  padding: 6px;
-  .weekdays{
-    padding: 6px;
-    margin: 4px;
-    .weekday{
-      padding: 12px;
+
+.calender {
+
+  .week-headers {
+    display: flex;
+
+    .week-header {
+      padding: 6px;
       color: $gray;
       font-weight: 700;
       font-size: 12px;
-      width: 28px;
-      line-height: 28px;
+      flex-grow: 1;
+      flex-basis: 0;
     }
-    border-bottom: 1px solid $lighter-gray; 
+    border-bottom: 1px solid $lighter-gray;
   }
-  .week{
-    padding: 6px;
+
+  .week-days {
     outline: none;
-    margin: 4px;
+    display: flex;
+    flex-direction: row;
+    align-items: space-around;
+    padding: 4px 0px;
+
     .day {
-      line-height: 40px;
-      &:hover{
+      flex-grow: 1;
+      flex-grow: 1;
+      flex-basis: 0;
+
+      &:hover {
         background-color: $light-gray;
         border-radius: 50%;
         outline: none;
       }
-      &:active, &:focus, &.selected-day{
+
+      &:active,
+      &:focus,
+      &.selected-day {
         background-color: $blue;
-        border-radius: 50%; 
+        border-radius: 50%;
         color: $white;
         outline: none;
       }
+
       font-size: 16px;
       color: $darkest-gray;
       padding: 6px;
       text-align: center;
-
     }
   }
 }
