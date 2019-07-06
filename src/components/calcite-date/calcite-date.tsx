@@ -11,11 +11,11 @@ import {
 import { ENTER } from "../../utils/keys";
 
 @Component({
-  tag: "calcite-dateas",
+  tag: "calcite-date",
   styleUrl: "calcite-date.scss",
   shadow: true
 })
-export class CalciteDateAs {
+export class CalciteDate {
   @Element() el: HTMLElement;
   /**
    * Value of the form control
@@ -70,33 +70,33 @@ export class CalciteDateAs {
     this.syncProxyInputToThis();
   }
 
-  selectPrevMonth() {
+  private selectPrevMonth() {
     if (this.month === 0) {
       this.year = this.year - 1;
     }
     this.month = (12 + this.month - 1) % 12;
   }
 
-  selectPrevMonthOnEnter(event: KeyboardEvent) {
+  private selectPrevMonthOnEnter(event: KeyboardEvent) {
     if (event.keyCode === ENTER) {
       this.selectPrevMonth();
     }
   }
 
-  selectNextMonth() {
+  private selectNextMonth() {
     if (this.month === 11) {
       this.year = this.year + 1;
     }
     this.month = (this.month + 1) % 12;
   }
 
-  selectNextMonthOnEnter(event: KeyboardEvent) {
+  private selectNextMonthOnEnter(event: KeyboardEvent) {
     if (event.keyCode === ENTER) {
       this.selectNextMonth();
     }
   }
 
-  onYearChange(event) {
+  private onYearChange(event) {
     this.year = parseInt(event.target.value);
   }
 
@@ -298,7 +298,7 @@ export class CalciteDateAs {
     );
   }
 
-  keyPress(event, day) {
+  private keyPress(event, day) {
     if (event.keyCode === ENTER) {
       this.setDate(day);
     }
@@ -339,7 +339,7 @@ export class CalciteDateAs {
     );
   }
 
-  setDate(day) {
+  private setDate(day) {
     this.value = new Date(this.year, this.month, day)
       .toISOString()
       .substr(0, 10);
